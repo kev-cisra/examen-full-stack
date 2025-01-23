@@ -18,4 +18,18 @@ class products extends Model
         'stock',
         'category_id'
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(categories::class, 'category_id');
+    }
+
+    public function scopeCategoryRel($q)
+    {
+        return $q->with([
+            "category" => function ($q) {
+                $q->select('id', 'name');
+            }
+        ]);
+    }
 }
