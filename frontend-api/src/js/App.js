@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
 const modalCategoria = new bootstrap.Modal(document.getElementById('new_cate'))
 const modalProducto = new bootstrap.Modal(document.getElementById('new_produ'))
 
+// Mostrar alerta global
 const verAleGlobal = (text = "") => {
     let alertGlobal = document.getElementById('alertGlob');
     alertGlobal.classList.add('d-none');
