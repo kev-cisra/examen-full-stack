@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./src/css/bootstrap.min.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row my-5">
+            <div class="alert alert-success d-none" role="alert" id="alertGlob"></div>
+            <div class="col-sm-6 col-md-2 my-4">
+                <button class="btn btn-primary" data-bs-toggle="modal" onclick="limpiarCategoria()" data-bs-target="#new_cate">agregar categoria</button>
+            </div>
+            <div class="col-sm-6 col-md-2 my-4">
+                <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#new_produ" onclick="limpiaProdu()">agregar producto</button>
+            </div>
+
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                  <button class="nav-link active" id="nav-produ-tab" data-bs-toggle="tab" data-bs-target="#nav-produ" type="button" role="tab" aria-controls="nav-produ" aria-selected="true">Productos</button>
+                  <button class="nav-link" id="nav-cate-tab" data-bs-toggle="tab" data-bs-target="#nav-cate" type="button" role="tab" aria-controls="nav-cate" aria-selected="false">Categorias</button>
+                </div>
+            </nav>
+            <div class="tab-content p-5" id="nav-tabContent">
+            <!-- Tabla de productos -->
+            <div class="tab-pane fade show active" id="nav-produ" role="tabpanel" aria-labelledby="nav-produ-tab">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>nombre</th>
+                            <th>stock</th>
+                            <th>categoria</th>
+                            <th colspan="2">acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table_products">
+                    </tbody>
+                </table> 
+            </div>
+            <!-- Tabla de categorias -->
+            <div class="tab-pane fade" id="nav-cate" role="tabpanel" aria-labelledby="nav-cate-tab">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>nombre</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table_cate">
+                    </tbody>
+                </table> 
+            </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal Formulario de categorias -->
+    <div class="modal fade" id="new_cate" tabindex="-1" aria-labelledby="newCateLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="newCateLabel">Nueva Categoria</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form id="form_cate">
+                <div class="form-group">
+                    <label for="name">Nombre</label>
+                    <input type="text" oninput="checkName()" class="form-control" id="name" name="name" placeholder="Ingresa nueva categoria" />
+                </div>
+                <div class="alert alert-danger d-none" id="alertName" role="alert"></div>
+                <div class="form-group p-3">
+                    <button type="submit" id="btnSaveCate" class="btn btn-success" onClick="saveCategory">Guardar</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <!-- Modal Fomrulario de produccion -->
+    <div class="modal fade" id="new_produ" tabindex="-1" aria-labelledby="newProduLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="newProduLabel">Nuevo Producto</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form id="formProd" class="row">
+                <input type="hidden" id="idPro" />
+                <div class="col-sm-12 col-md-4">
+                    <div class="form-group">
+                        <label for="namePro">Nombre</label>
+                        <input type="text" oninput="checkNamePro()" class="form-control" id="namePro" name="name" />
+                    </div>      
+                </div>
+                <div class="col-sm-12 col-md-4">
+                    <div class="form-group">
+                        <label for="stockPro">Stock</label>
+                        <input type="number" class="form-control" id="stockPro" name="name" />
+                    </div>      
+                </div>
+                <div class="col-sm-12 col-md-4">
+                    <div class="form-group">
+                        <label for="categoPro">categorias</label>
+                        <select class="form-select" id="categoPro" name="categoria">
+                        </select>
+                    </div>      
+                </div>
+                <div class="alert alert-danger d-none" id="alertProd" role="alert"></div>
+                <div class="form-group p-3">
+                    <button type="submit" class="btn btn-success" id="btnSaveProdu">Guardar</button>
+                    <button type="submit" class="btn btn-primary" id="btnEditProdu">Actualizar</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+            </form>
+            </div>
+        </div>
+    </div>
+        
+
+    <script src="./src/js/bootstrap.min.js"></script>
+    <script src="./src/js/App.js"></script>
+</body>
+</html>
