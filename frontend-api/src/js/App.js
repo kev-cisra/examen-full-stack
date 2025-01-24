@@ -32,8 +32,8 @@ const getCategories = async () => {
 
     await fetch('http://localhost:8000/api/categories',{
             method: 'GET',    
-            headers: {'Authorization': `Bearer ${apiToken}`
-        }})
+            headers: {'Authorization': `Bearer ${apiToken}`}
+        })
         .then(response => response.json())
         .then(data => {
             data.categories.forEach(element => {
@@ -56,8 +56,8 @@ const getProducts = async () => {
 
     await fetch('http://localhost:8000/api/products',{
             method: 'GET',    
-            headers: {'Authorization': `Bearer ${apiToken}`
-        }})
+            headers: {'Authorization': `Bearer ${apiToken}`}
+        })
         .then(response => response.json())
         .then(data => {
 
@@ -111,7 +111,8 @@ const saveCategory = (event) => {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'data-type': 'json'
+            'data-type': 'json',
+            'Authorization': `Bearer ${apiToken}`
         },
         body: JSON.stringify({name: nom}),
     })
@@ -226,7 +227,8 @@ const saveProduct = () => {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'data-type': 'json'
+            'data-type': 'json',
+            'Authorization': `Bearer ${apiToken}`
         },
         body: JSON.stringify({name: name, stock: stock, category_id: cate}),
     })
@@ -289,7 +291,8 @@ const editProduct = () => {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
-            'data-type': 'json'
+            'data-type': 'json',
+            'Authorization': `Bearer ${apiToken}`
         },
         body: JSON.stringify({name: datos.name, stock: datos.stock, category_id: datos.category_id}),
     })
@@ -309,6 +312,7 @@ document.querySelector('#formProd').addEventListener('submit', verEdit);
 const deleteProduct = (id) => {
     fetch(`http://localhost:8000/api/products/${id}`, {
         method: 'DELETE',
+        headers: {'Authorization': `Bearer ${apiToken}`}
     })
     .then(response => response.json())
     .then(data => {

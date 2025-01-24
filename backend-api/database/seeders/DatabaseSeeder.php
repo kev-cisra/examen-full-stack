@@ -25,8 +25,8 @@ class DatabaseSeeder extends Seeder
             'api_token' => 'S3EZQ46Fzm0EpZnmR2fyvvbDsNFKFxadBQeCFv5wj0j2tvbKbQ4G8AVqGuww',
         ]);
 
-        categories::factory(10)->create()->each(function ($category) {
-            products::factory(5)->create(['category_id' => $category->id]);
+        categories::factory(5)->create()->each(function ($category) {
+            products::factory(3)->create(['category_id' => $category->id]);
         });
     }
 }
