@@ -7,6 +7,15 @@ use Illuminate\Http\Request;
 
 class Authenticate extends Middleware
 {
+    protected function authenticate($request, array $guards)
+    {
+        if ($this->auth->guard('api')->check()) {
+            return $this->auth->shouldUse('api');
+        }
+
+        $this->unauthenticated($request, $guards);
+    }
+    
     /**
      * Get the path the user should be redirected to when they are not authenticated.
      */
