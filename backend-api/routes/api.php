@@ -16,13 +16,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('categories')->group(function () {
+Route::prefix('categories')->middleware('auth:api')->group(function () {
     Route::get('/', [CategoriesController::class, 'index']);// Muestra todas las categorías
 
     Route::post('/', [CategoriesController::class, 'store']); // Crea a nueva categoría
 });
 
-Route::prefix('products')->group(function () {
+Route::prefix('products')->middleware('auth:api')->group(function () {
     Route::get('/', [ProductsController::class, 'index']);// Muestra todos los productos
 
     Route::post('/', [ProductsController::class, 'store']); // Crea a nuevo producto

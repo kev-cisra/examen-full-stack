@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', () => {
     getProducts();
 });
 
+const apiToken = "S3EZQ46Fzm0EpZnmR2fyvvbDsNFKFxadBQeCFv5wj0j2tvbKbQ4G8AVqGuww";
+
 // Modales
 const modalCategoria = new bootstrap.Modal(document.getElementById('new_cate'))
 const modalProducto = new bootstrap.Modal(document.getElementById('new_produ'))
@@ -28,7 +30,10 @@ const getCategories = async () => {
     seleCate.innerHTML = '';
     tabCate.innerHTML = '';
 
-    await fetch('http://localhost:8000/api/categories')
+    await fetch('http://localhost:8000/api/categories',{
+            method: 'GET',    
+            headers: {'Authorization': `Bearer ${apiToken}`
+        }})
         .then(response => response.json())
         .then(data => {
             data.categories.forEach(element => {
@@ -49,7 +54,10 @@ const getProducts = async () => {
     let tabProdu = document.getElementById('table_products'); // tabla de productos
     tabProdu.innerHTML = '';
 
-    await fetch('http://localhost:8000/api/products')
+    await fetch('http://localhost:8000/api/products',{
+            method: 'GET',    
+            headers: {'Authorization': `Bearer ${apiToken}`
+        }})
         .then(response => response.json())
         .then(data => {
 
