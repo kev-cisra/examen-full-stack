@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const apiToken = "S3EZQ46Fzm0EpZnmR2fyvvbDsNFKFxadBQeCFv5wj0j2tvbKbQ4G8AVqGuww";
 
+let allProducts = [];
+
 // Modales
 const modalCategoria = new bootstrap.Modal(document.getElementById('new_cate'))
 const modalProducto = new bootstrap.Modal(document.getElementById('new_produ'))
@@ -25,10 +27,12 @@ const verAleGlobal = (text = "") => {
 const getCategories = async () => {
     let seleCate = document.getElementById('categoPro'); // select de categorias
     let tabCate = document.getElementById('table_cate'); // tabla de categorias
+    let filterCategory = document.getElementById('filterCategory'); // select para filtrar
 
     // Limpiar tabla y select
     seleCate.innerHTML = '';
     tabCate.innerHTML = '';
+    filterCategory.innerHTML = '<option value="">Todas las categorías</option>';
 
     await fetch('http://localhost:8000/api/categories',{
             method: 'GET',    
@@ -45,6 +49,7 @@ const getCategories = async () => {
                     </tr>
                 `
                 seleCate.innerHTML += `<option value="${element.id}">${element.name}</option>`;
+                filterCategory.innerHTML += `<option value="${element.id}">${element.name}</option>`;
             });
         });
 }
@@ -60,22 +65,42 @@ const getProducts = async () => {
         })
         .then(response => response.json())
         .then(data => {
-
-            data.products.forEach(element => {
-                // Agregar datos a la tabla
-                tabProdu.innerHTML += `
-                    <tr>
-                        <td style="width: 10%;">${element.id}</td>
-                        <td style="width: 25%;">${element.name}</td>
-                        <td style="width: 15%;">${element.stock}</td>
-                        <td style="width: 25%;">${element.category.name}</td>
-                        <td style="width: 25%;"> <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#new_produ" onclick='asigData(${JSON.stringify(element)})'>Editar</button> </td>
-                        <td style="width: 25%;"> <button class="btn btn-danger" onclick="deleteProduct(${element.id})">Eliminar</button> </td>
-                    </tr>
-                `;
-            });
+            allProducts = data.products; // Almacenar los productos en la variable global
+            renderProducts(allProducts); // Renderizar los productos
         });
 }
+
+// 
+const renderProducts = (products) => {
+    let tabProdu = document.getElementById('table_products');
+    tabProdu.innerHTML = '';
+
+    products.forEach(element => {
+        tabProdu.innerHTML += `
+            <tr>
+                <td style="width: 10%;">${element.id}</td>
+                <td style="width: 25%;">${element.name}</td>
+                <td style="width: 15%;">${element.stock}</td>
+                <td style="width: 25%;">${element.category.name}</td>
+                <td style="width: 15%;"> <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#new_produ" onclick='asigData(${JSON.stringify(element)})'>Editar</button> </td>
+                <td style="width: 15%;"> <button class="btn btn-danger" onclick="deleteProduct(${element.id})">Eliminar</button> </td>
+            </tr>
+        `;
+    });
+}
+
+const filterProducts = (categoryId) => {
+    if (categoryId === '') {
+        renderProducts(allProducts); // Mostrar todos los productos si no se selecciona ninguna categoría
+    } else {
+        const filteredProducts = allProducts.filter(product => product.category.id == categoryId);
+        renderProducts(filteredProducts);
+    }
+}
+document.getElementById('filterCategory').addEventListener('change', (event) => {
+    const categoryId = event.target.value;
+    filterProducts(categoryId);
+});
 
 // Abrir modal de categoria
 const limpiarCategoria = () => {
