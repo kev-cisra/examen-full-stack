@@ -19,7 +19,9 @@ class productsFactory extends Factory
     {
         return [
             //
-            'name' => $this->faker->word,
+            'name' => $this->faker->randomElement([
+                'Televisor', 'Camiseta', 'Sofá', 'Muñeca', 'Libro de cocina', 'Bicicleta', 'Champú', 'Vitaminas', 'Neumático', 'Cereal'
+            ]),
             'stock' => $this->faker->numberBetween(1, 100),
             'category_id' => categories::factory(), // Relación con la categoría
         ];

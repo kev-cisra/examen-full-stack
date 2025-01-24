@@ -18,7 +18,9 @@ class categoriesFactory extends Factory
     {
         return [
             //
-            'name' => $this->faker->word,
+            'name' => $this->faker->randomElement([
+                'Electrónica', 'Ropa', 'Hogar', 'Juguetes', 'Libros', 'Deportes', 'Belleza', 'Salud', 'Automóviles', 'Alimentos'
+            ]),
         ];
     }
 }
