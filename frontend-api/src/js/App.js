@@ -65,12 +65,12 @@ const getProducts = async () => {
                 // Agregar datos a la tabla
                 tabProdu.innerHTML += `
                     <tr>
-                        <td>${element.id}</td>
-                        <td>${element.name}</td>
-                        <td>${element.stock}</td>
-                        <td>${element.category.name}</td>
-                        <td> <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#new_produ" onclick='asigData(${JSON.stringify(element)})'>Editar</button> </td>
-                        <td> <button class="btn btn-danger" onclick="deleteProduct(${element.id})">Eliminar</button> </td>
+                        <td style="width: 10%;">${element.id}</td>
+                        <td style="width: 25%;">${element.name}</td>
+                        <td style="width: 15%;">${element.stock}</td>
+                        <td style="width: 25%;">${element.category.name}</td>
+                        <td style="width: 25%;"> <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#new_produ" onclick='asigData(${JSON.stringify(element)})'>Editar</button> </td>
+                        <td style="width: 25%;"> <button class="btn btn-danger" onclick="deleteProduct(${element.id})">Eliminar</button> </td>
                     </tr>
                 `;
             });

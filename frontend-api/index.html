@@ -4,16 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./src/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./src/css/style.css">
     <title>Document</title>
 </head>
 <body>
     <div class="container-fluid">
         <div class="row my-5">
             <div class="alert alert-success d-none" role="alert" id="alertGlob"></div>
-            <div class="col-sm-6 col-md-2 my-4">
+            <div class="col-sm-6 col-md-2 my-2">
                 <button class="btn btn-primary" data-bs-toggle="modal" onclick="limpiarCategoria()" data-bs-target="#new_cate">agregar categoria</button>
             </div>
-            <div class="col-sm-6 col-md-2 my-4">
+            <div class="col-sm-6 col-md-2 my-2">
                 <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#new_produ" onclick="limpiaProdu()">agregar producto</button>
             </div>
 
@@ -29,14 +30,14 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>id</th>
-                            <th>nombre</th>
-                            <th>stock</th>
-                            <th>categoria</th>
-                            <th colspan="2">acciones</th>
+                            <th style="width: 10%;">id</th>
+                            <th style="width: 25%;">nombre</th>
+                            <th style="width: 15%;">stock</th>
+                            <th style="width: 25%;">categoria</th>
+                            <th style="width: 25%;" colspan="2">acciones</th>
                         </tr>
                     </thead>
-                    <tbody id="table_products">
+                    <tbody id="table_products" class="overTable">
                     </tbody>
                 </table> 
             </div>
@@ -49,7 +50,7 @@
                             <th>nombre</th>
                         </tr>
                     </thead>
-                    <tbody id="table_cate">
+                    <tbody id="table_cate" class="overTable">
                     </tbody>
                 </table> 
             </div>
